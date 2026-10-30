@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok Live — Dashboard</title>
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="header">
+    <div class="brand">
+      <div class="badge">TIKTOK LIVE WS</div>
+      <div class="title">Dashboard Streamer</div>
+    </div>
+    <div id="statusBadge" class="status disconnected">
+      <span class="dot"></span>
+      <span id="statusText">Terputus</span>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="label">Penonton</span>
+      <span class="value" id="statViewers">0</span>
+    </div>
+    <div class="stat">
+      <span class="label">Like</span>
+      <span class="value" id="statLikes">0</span>
+    </div>
+    <div class="stat">
+      <span class="label">Komentar</span>
+      <span class="value" id="statComments">0</span>
+    </div>
+    <div class="stat">
+      <span class="label">Donatur</span>
+      <span class="value gold" id="statDonors">0</span>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div>
+      <!-- Koneksi -->
+      <div class="card">
+        <h3>🔗 Hubungkan TikTok Live</h3>
+        <div class="field">
+          <label for="tiktokUsername">Username</label>
+          <input type="text" id="tiktokUsername" class="input" value="the_dimsuk" placeholder="username">
+        </div>
+        <div class="btn-group">
+          <button id="btnConnect" class="btn btn-primary btn-block">Hubungkan</button>
+          <button id="btnDisconnect" class="btn btn-danger btn-block hidden">Putuskan</button>
+        </div>
+        <div id="connMessage" class="msg"></div>
+      </div>
+
+      <!-- Overlay -->
+      <div class="card">
+        <h3>📺 Overlay OBS</h3>
+        <p>Masukkan URL sebagai Browser Source di OBS (420 × 700 px).</p>
+
+        <div class="link-box">
+          <div class="link-title">💬 Chat Terpisah</div>
+          <div class="link-desc">Hanya chat, ringan untuk OBS.</div>
+          <div class="link-row">
+            <code id="chatOverlayUrl">http://localhost:3000/chat</code>
+            <button id="btnCopyChat" class="btn btn-secondary btn-compact">Salin</button>
+          </div>
+          <a href="/chat" target="_blank" class="btn btn-secondary btn-block btn-sm">Buka di Jendela Terbaru ↗</a>
+          <button class="btn btn-secondary btn-block btn-sm mt-6" onclick="window.open('/chat','chatWindow','width=420,height=760,noopener,noreferrer')">
+            🖥️ Buka Chat di Jendela Terpisah (Desktop)
+          </button>
+        </div>
+
+        <div class="link-box">
+          <div class="link-title">🎁 Overlay Lengkap</div>
+          <div class="link-desc">Chat + alert gift + spotlight donatur.</div>
+          <div class="link-row">
+            <code id="overlayUrl">http://localhost:3000/overlay</code>
+            <button id="btnCopyOverlay" class="btn btn-secondary btn-compact">Salin</button>
+          </div>
+          <a href="/overlay" target="_blank" class="btn btn-secondary btn-block btn-sm mt-8">Buka Overlay ↗</a>
+        </div>
+      </div>
+
+      <!-- Simulator -->
+      <div class="card fade">
+        <h3>🧪 Simulator (Offline)</h3>
+        <p>Uji chat & kotak donatur tanpa live TikTok.</p>
+
+        <div class="field">
+          <label>Chat Biasa</label>
+          <div style="display:flex;gap:8px;">
+            <input type="text" id="simCommentText" class="input" placeholder="Pesan..." value="Halo streamer!">
+            <button id="btnSimChat" class="btn btn-secondary btn-sm">Kirim</button>
+          </div>
+        </div>
+
+        <div class="field mt-8">
+          <label>Chat Donatur (VIP)</label>
+          <div style="display:flex;gap:8px;">
+            <input type="text" id="simDonorCommentText" class="input" placeholder="Pesan donatur..." value="Keren banget! 🔥">
+            <button id="btnSimDonorChat" class="btn btn-gold btn-sm">Kirim VIP</button>
+          </div>
+        </div>
+
+        <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:0.04em;margin:12px 0 8px;">Gift Cepat</div>
+        <div class="btn-group">
+          <button class="btn btn-secondary btn-quick-gift" data-gift="Mawar" data-diamonds="1">🌹 Mawar</button>
+          <button class="btn btn-secondary btn-quick-gift" data-gift="Paus Biru" data-diamonds="2150">🐳 Paus</button>
+          <button class="btn btn-gold btn-quick-gift" data-gift="TikTok Universe" data-diamonds="34999">🌌 Universe</button>
+        </div>
+
+        <button id="btnResetData" class="btn btn-danger btn-sm btn-block mt-8">Reset Semua Data</button>
+      </div>
+    </div>
+
+    <div>
+      <!-- Preview -->
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <h3>👀 Preview Overlay</h3>
+          <span style="font-size:0.75rem;font-weight:700;color:var(--cyan);">Realtime</span>
+        </div>
+        <div class="preview">
+          <iframe id="previewIframe" src="/overlay"></iframe>
+        </div>
+      </div>
+
+      <!-- Donatur -->
+      <div class="card">
+        <h3>👑 Daftar Donatur</h3>
+        <div id="donorCountBadge" class="vip-count">0 DONATUR</div>
+        <div class="table-wrap">
+          <table class="donor">
+            <thead>
+              <tr>
+                <th class="rank">#</th>
+                <th>Nama</th>
+                <th class="gift-cell">Gift</th>
+                <th class="dia-cell text-right">Diamond</th>
+              </tr>
+            </thead>
+            <tbody id="donorsTableBody">
+              <tr><td colspan="4" class="empty">Belum ada donasi.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>

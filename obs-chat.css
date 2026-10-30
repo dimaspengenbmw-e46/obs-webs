@@ -1,0 +1,231 @@
+/**
+ * OBS CHAT OVERLAY STYLESHEET - Modern & Ringan
+ * Digunakan oleh: obs-chat.html (Browser Source OBS / jendela terpisah)
+ * Ukuran rekomendasi: 420 x 700 px, background transparan.
+ */
+
+:root {
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-size-text: 15px;
+    --font-size-username: 13px;
+    --chat-max-width: 420px;
+    --chat-gap: 10px;
+    --card-padding: 10px 14px;
+    --card-radius: 14px;
+    --avatar-size: 34px;
+
+    --chat-bg: rgba(18, 22, 33, 0.82);
+    --chat-border: rgba(255, 255, 255, 0.07);
+    --chat-text: #ffffff;
+    --username-color: #38bdf8;
+
+    --donor-bg: linear-gradient(135deg, rgba(34, 25, 10, 0.94) 0%, rgba(48, 18, 38, 0.94) 100%);
+    --donor-username: #ffd700;
+    --donor-glow: rgba(255, 215, 0, 0.45);
+    --donor-badge: linear-gradient(135deg, #f59e0b, #eab308);
+    --diamond-color: #00f2fe;
+
+    --anim-speed: 0.3s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: transparent !important;
+    font-family: var(--font-family);
+    color: var(--chat-text);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.obs-chat-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: var(--chat-max-width);
+    height: 100vh;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--chat-gap);
+    box-sizing: border-box;
+}
+
+.obs-chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--chat-gap);
+    overflow-y: auto;
+    max-height: 100%;
+    padding-right: 4px;
+    scroll-behavior: smooth;
+}
+
+.obs-chat-container::-webkit-scrollbar { display: none; }
+.obs-chat-container { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Kartu chat */
+.obs-chat-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--chat-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--chat-border);
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    transform-origin: left center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.obs-chat-card .obs-avatar {
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    background: #262938;
+}
+
+.obs-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.obs-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+    flex-wrap: wrap;
+}
+
+.obs-username {
+    font-weight: 800;
+    font-size: var(--font-size-username);
+    color: var(--username-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.obs-text {
+    font-size: var(--font-size-text);
+    line-height: 1.38;
+    color: var(--chat-text);
+    word-break: break-word;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.obs-time {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-left: auto;
+}
+
+/* Animasi masuk */
+.anim-slide-left {
+    animation: obsSlideLeft var(--anim-speed) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.anim-fade-in {
+    animation: obsFadeIn var(--anim-speed) ease forwards;
+}
+.anim-pop {
+    animation: obsPop var(--anim-speed) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes obsSlideLeft {
+    0% { opacity: 0; transform: translateX(-34px) scale(0.96); }
+    100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes obsFadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes obsPop {
+    0% { opacity: 0; transform: scale(0.85); }
+    70% { transform: scale(1.04); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Kotak khusus donatur */
+.obs-chat-card.is-donor {
+    background: var(--donor-bg);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    box-shadow: 0 0 20px var(--donor-glow), 0 0 35px rgba(254, 44, 85, 0.25);
+}
+
+.obs-chat-card.is-donor::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: calc(var(--card-radius) + 2px);
+    background: linear-gradient(45deg, #ffd700, #ff007f, #00f2fe, #ffd700);
+    background-size: 300% 300%;
+    animation: obsNeonBorder 4s linear infinite;
+}
+
+.obs-chat-card.is-donor .obs-avatar {
+    border: 2px solid #ffd700;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
+}
+
+.obs-chat-card.is-donor .obs-username {
+    color: var(--donor-username);
+    font-size: calc(var(--font-size-username) + 1px);
+}
+
+.obs-vip-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: var(--donor-badge);
+    color: #000000;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.obs-diamond-pill {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(0, 242, 254, 0.15);
+    border: 1px solid rgba(0, 242, 254, 0.4);
+    color: var(--diamond-color);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 12px;
+}
+
+@keyframes obsNeonBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Pesan menghilang */
+.obs-chat-card.fade-out {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.is-hidden { display: none !important; }

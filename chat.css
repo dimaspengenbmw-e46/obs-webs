@@ -1,0 +1,109 @@
+/* Simple chat panel — standalone window */
+body.chat-mode {
+  background: var(--bg);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.chat-app {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(22, 25, 34, 0.6);
+  flex-shrink: 0;
+}
+
+.chat-brand { display: flex; align-items: center; gap: 10px; }
+.chat-badge { background: linear-gradient(135deg, var(--red), #7928ca); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 8px; }
+.chat-title { font-size: 1.05rem; font-weight: 700; color: #fff; }
+.chat-status { font-size: 0.78rem; font-weight: 700; color: var(--muted); }
+.chat-status.connected { color: var(--green); }
+.chat-status.disconnected { color: var(--red); }
+
+.chat-body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  gap: 10px;
+}
+
+.donor-count {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  align-self: flex-start;
+}
+
+.chat-feed {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 6px;
+  scroll-behavior: smooth;
+}
+.chat-feed::-webkit-scrollbar { width: 4px; }
+.chat-feed::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
+
+/* Chat bubble card — lebar menyesuaikan teks secara otomatis */
+.chat-card {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: auto;
+  max-width: 82%;
+  background: rgba(22, 25, 34, 0.7);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  align-self: flex-start;
+}
+.chat-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.15); background: #262938; }
+.chat-content { flex: 1; min-width: 0; }
+.chat-header-line { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; flex-wrap: wrap; }
+.chat-user { font-weight: 700; font-size: 0.85rem; color: #22d3ee; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; }
+.chat-text { font-size: 0.92rem; line-height: 1.4; color: #fff; word-break: break-word; white-space: pre-wrap; }
+
+.chat-card.is-donor {
+  background: linear-gradient(135deg, rgba(34, 25, 10, 0.92) 0%, rgba(48, 18, 38, 0.92) 100%);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  box-shadow: 0 0 22px rgba(255, 215, 0, 0.45);
+}
+.chat-card.is-donor::before {
+  content: ''; position: absolute; inset: -2px; z-index: -1; border-radius: 18px;
+  background: linear-gradient(45deg, #ffd700, #ff007f, #00f2fe, #ffd700);
+  background-size: 300% 300%;
+  animation: neon 4s linear infinite;
+}
+.chat-card.is-donor .chat-avatar { border: 2px solid #ffd700; box-shadow: 0 0 12px rgba(255,215,0,0.6); }
+.chat-card.is-donor .chat-user { color: #ffd700; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+.chat-card.is-donor .chat-text { color: #fffaf0; font-weight: 600; }
+
+.empty-feed { align-self: center; color: var(--muted); font-size: 0.9rem; margin-top: 40px; }
+
+.pill { display: inline-flex; align-items: center; gap: 5px; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; }
+.pill.donor { background: linear-gradient(90deg, #ff8c00, #ffd700); color: #140a00; }
+.pill.dia { background: rgba(34,211,238,0.12); color: #22d3ee; border: 1px solid rgba(34,211,238,0.35); }
+
+.hidden { display: none !important; }
+
+@keyframes neon { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }

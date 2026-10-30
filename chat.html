@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok Live — Chat Panel</title>
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/chat.css">
+<link rel="stylesheet" href="/css/themes.css">
+</head>
+<body class="chat-mode theme-neon">
+<div class="chat-app">
+  <header class="chat-header">
+    <div class="chat-brand">
+      <div class="chat-badge">TIKTOK LIVE WS</div>
+      <div class="chat-title">Live Chat</div>
+    </div>
+    <div id="chatStatus" class="chat-status disconnected">Terputus</div>
+    <div class="theme-switcher" id="themeSwitcher">
+      <button class="theme-btn active" data-theme="neon">Neon</button>
+      <button class="theme-btn" data-theme="cyber">Cyber</button>
+      <button class="theme-btn" data-theme="sunset">Sunset</button>
+      <button class="theme-btn" data-theme="ocean">Ocean</button>
+      <button class="theme-btn" data-theme="forest">Forest</button>
+      <button class="theme-btn" data-theme="purple">Purple</button>
+    </div>
+  </header>
+
+  <div class="chat-body">
+    <div id="chatDonorCount" class="donor-count hidden">0 DONATUR</div>
+    <div id="chatFeed" class="chat-feed">
+      <div class="empty-feed">Belum ada chat.</div>
+    </div>
+  </div>
+</div>
+<script src="/js/chat.js"></script>
+</body>
+</html>

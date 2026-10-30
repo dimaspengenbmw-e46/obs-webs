@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok Live — Overlay</title>
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/overlay.css">
+<link rel="stylesheet" href="/css/themes.css">
+</head>
+<body class="overlay-mode theme-cyber">
+<div class="overlay-wrap">
+
+  <div id="giftAlert" class="gift-toast">
+    <div class="gift-icon" id="giftIcon">🎁</div>
+    <div class="gift-body">
+      <div class="gift-line">
+        <span id="giftSender">Sultan TikTok</span>
+        <span class="gift-count" id="giftCount">x1</span>
+      </div>
+      <div class="gift-name" id="giftTitle">Mawar</div>
+      <div class="gift-dia" id="giftDiamonds">10 💎</div>
+    </div>
+  </div>
+
+  <!-- Penonton real-time -->
+  <div id="viewerBar" class="viewer-bar hidden">
+    <span class="viewer-label">👁️ Penonton</span>
+    <span id="viewerCount" class="viewer-value">0</span>
+  </div>
+
+  <div id="donorSpotlight" class="donor-spotlight hidden">
+    <span class="spotlight-crown">👑</span>
+    <div class="spotlight-body">
+      <div class="spotlight-label">Top Donatur</div>
+      <div class="spotlight-name" id="topDonorName">-</div>
+    </div>
+    <div class="spotlight-dia" id="topDonorDiamonds">0 💎</div>
+  </div>
+
+  <div id="chatBox" class="chat-feed">
+    <!-- Kartu chat di-sisipkan oleh overlay.js -->
+  </div>
+
+  <!-- Pengganti Tema -->
+  <div class="theme-switcher" id="themeSwitcher">
+    <button class="theme-btn active" data-theme="cyber">Cyber</button>
+    <button class="theme-btn" data-theme="neon">Neon</button>
+    <button class="theme-btn" data-theme="sunset">Sunset</button>
+    <button class="theme-btn" data-theme="ocean">Ocean</button>
+    <button class="theme-btn" data-theme="forest">Forest</button>
+    <button class="theme-btn" data-theme="purple">Purple</button>
+  </div>
+</div>
+<script src="/js/overlay.js"></script>
+</body>
+</html>

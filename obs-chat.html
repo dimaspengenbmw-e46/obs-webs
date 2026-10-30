@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Live - OBS Chat Overlay Mandiri</title>
+    <!-- CSS Khusus OBS Chat (Bisa di-custom di public/css/obs-chat.css atau via OBS Browser Source) -->
+    <link rel="stylesheet" href="/css/obs-chat.css">
+</head>
+<body>
+    <div class="obs-chat-wrapper">
+        <!-- Container Chat Feed -->
+        <div id="chatContainer" class="obs-chat-container">
+            <!-- Pesan chat akan masuk ke sini secara dinamis -->
+        </div>
+    </div>
+
+    <!-- Script WebSocket Mandiri -->
+    <script src="/js/obs-socket.js"></script>
+    <!-- Script Controller Chat OBS (Bisa di-custom di public/js/obs-chat.js) -->
+    <script src="/js/obs-chat.js"></script>
+</body>
+</html>
+

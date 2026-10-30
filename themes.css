@@ -1,0 +1,161 @@
+/* ============================================================================
+   CHAT THEMES — Smooth gradient themes for overlay & chat panel
+   Pakai class di <body>, misal <body class="overlay-mode theme-neon">
+   atau <body class="chat-mode theme-sunset">
+   ============================================================================ */
+
+/* Base theme variables (default) */
+:root {
+  --theme-bg: linear-gradient(135deg, rgba(22, 25, 34, 0.75) 0%, rgba(30, 34, 46, 0.75) 100%);
+  --theme-border: rgba(255, 255, 255, 0.08);
+  --theme-glow: 0 0 20px rgba(255, 255, 255, 0.12);
+  --theme-text: #fff;
+  --theme-accent: #22d3ee;
+  --theme-gradient: linear-gradient(135deg, #ffd700, #ff007f, #00f2fe, #ffd700);
+}
+
+/* ---------- Neon ---------- */
+body.theme-neon {
+  --theme-bg: linear-gradient(135deg, rgba(16, 18, 26, 0.8) 0%, rgba(24, 28, 38, 0.8) 100%);
+  --theme-border: rgba(255, 0, 127, 0.35);
+  --theme-glow: 0 0 24px rgba(255, 0, 127, 0.35), 0 0 45px rgba(34, 211, 238, 0.2);
+  --theme-text: #fff;
+  --theme-accent: #22d3ee;
+  --theme-gradient: linear-gradient(45deg, #ff007f, #ffd700, #22d3ee, #ff007f);
+}
+
+/* ---------- Sunset ---------- */
+body.theme-sunset {
+  --theme-bg: linear-gradient(135deg, rgba(28, 14, 22, 0.85) 0%, rgba(44, 20, 30, 0.85) 100%);
+  --theme-border: rgba(255, 94, 77, 0.35);
+  --theme-glow: 0 0 24px rgba(255, 94, 77, 0.35), 0 0 45px rgba(255, 165, 0, 0.2);
+  --theme-text: #fff;
+  --theme-accent: #ff7043;
+  --theme-gradient: linear-gradient(45deg, #ff3c54, #ffa726, #ffeb3b, #ff3c54);
+}
+
+/* ---------- Ocean ---------- */
+body.theme-ocean {
+  --theme-bg: linear-gradient(135deg, rgba(10, 24, 34, 0.85) 0%, rgba(16, 38, 54, 0.85) 100%);
+  --theme-border: rgba(34, 211, 238, 0.35);
+  --theme-glow: 0 0 24px rgba(34, 211, 238, 0.35), 0 0 45px rgba(2, 132, 199, 0.2);
+  --theme-text: #e0f7ff;
+  --theme-accent: #00b4d8;
+  --theme-gradient: linear-gradient(45deg, #00b4d8, #0077b6, #023e8a, #00b4d8);
+}
+
+/* ---------- Forest ---------- */
+body.theme-forest {
+  --theme-bg: linear-gradient(135deg, rgba(14, 24, 16, 0.85) 0%, rgba(22, 38, 26, 0.85) 100%);
+  --theme-border: rgba(74, 222, 128, 0.35);
+  --theme-glow: 0 0 24px rgba(74, 222, 128, 0.35), 0 0 45px rgba(16, 185, 129, 0.2);
+  --theme-text: #ccfbf1;
+  --theme-accent: #10b981;
+  --theme-gradient: linear-gradient(45deg, #10b981, #34d399, #6ee7b7, #10b981);
+}
+
+/* ---------- Purple ---------- */
+body.theme-purple {
+  --theme-bg: linear-gradient(135deg, rgba(24, 12, 34, 0.85) 0%, rgba(36, 20, 50, 0.85) 100%);
+  --theme-border: rgba(168, 85, 247, 0.35);
+  --theme-glow: 0 0 24px rgba(168, 85, 247, 0.35), 0 0 45px rgba(139, 92, 246, 0.2);
+  --theme-text: #f3e8ff;
+  --theme-accent: #a855f7;
+  --theme-gradient: linear-gradient(45deg, #a855f7, #c084fc, #d8b4fe, #a855f7);
+}
+
+/* ---------- Cyber ---------- */
+body.theme-cyber {
+  --theme-bg: linear-gradient(135deg, rgba(12, 12, 20, 0.85) 0%, rgba(20, 20, 34, 0.85) 100%);
+  --theme-border: rgba(0, 255, 255, 0.35);
+  --theme-glow: 0 0 24px rgba(0, 255, 255, 0.35), 0 0 45px rgba(255, 0, 255, 0.2);
+  --theme-text: #e0ffff;
+  --theme-accent: #00ffff;
+  --theme-gradient: linear-gradient(45deg, #00ffff, #bc13fe, #ff00ff, #00ffff);
+}
+
+/* ---------- Apply themes to chat cards ---------- */
+.chat-card {
+  background: var(--theme-bg) !important;
+  border: 1px solid var(--theme-border) !important;
+  box-shadow: var(--theme-glow) !important;
+}
+
+.chat-card .chat-text { color: var(--theme-text); }
+.chat-card .chat-user { color: var(--theme-accent); }
+
+.chat-card.is-donor {
+  background: var(--theme-bg) !important;
+  border: 2px solid transparent !important;
+  box-shadow: var(--theme-glow) !important;
+}
+
+.chat-card.is-donor::before {
+  background: var(--theme-gradient) !important;
+  background-size: 300% 300% !important;
+  animation: neonBorder 4s linear infinite !important;
+}
+
+.chat-card.is-donor .chat-user {
+  color: var(--theme-accent) !important;
+  text-shadow: 0 0 10px var(--theme-accent) !important;
+}
+
+.chat-card.is-donor .chat-text {
+  color: var(--theme-text) !important;
+}
+
+@keyframes neonBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Donor badge colors per theme */
+.pill.donor {
+  background: var(--theme-gradient) !important;
+  color: #000 !important;
+}
+
+.pill.dia {
+  background: rgba(34, 211, 238, 0.15);
+  border-color: rgba(34, 211, 238, 0.4);
+  color: var(--theme-accent);
+}
+
+/* ---------- Theme Switcher ---------- */
+.theme-switcher {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 6px;
+  backdrop-filter: blur(8px);
+  z-index: 100;
+}
+.theme-btn {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.theme-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+.theme-btn.active {
+  background: var(--theme-accent);
+  color: #000;
+  border-color: var(--theme-accent);
+  box-shadow: 0 0 12px var(--theme-accent);
+}
